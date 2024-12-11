@@ -49,18 +49,3 @@ cd backend && npm start
 ```bash
 cd backend && npm run server
 ```
-
-### Environment Configuration
-
-- Back-end application
-
-Create a file named `.env` in the backend directory and include all necessary configurations as shown below.
-
-```bash
-NODE_ENV=
-PORT=
-MONGODB_URI=
-JWT_SECRET=
-JWT_EXPIRE=
-JWT_COOKIE_EXPIRE=
-```
