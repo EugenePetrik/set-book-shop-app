@@ -1,0 +1,51 @@
+{
+  "name": "set-book-shop-app",
+  "version": "1.0.0",
+  "description": "Bookshop application for the EPAM SET program",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky",
+    "check-prettier": "prettier --check .",
+    "check-eslint": "eslint . --ext js",
+    "check-cspell": "cspell . --quiet",
+    "check-all": "npm run check-prettier && npm run check-eslint && npm run check-cspell",
+    "format": "prettier --write . && eslint . --ext js --fix",
+    "server": "cd backend && npm start",
+    "client": "cd frontend && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EugenePetrik/set-book-shop-app.git"
+  },
+  "keywords": [
+    "JS",
+    "SET",
+    "Express",
+    "API",
+    "Swagger",
+    "React"
+  ],
+  "author": "Yevhen Petryk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EugenePetrik/set-book-shop-app/issues"
+  },
+  "homepage": "https://github.com/EugenePetrik/set-book-shop-app#readme",
+  "dependencies": {
+    "cspell": "^8.16.1"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^2.12.1",
+    "@types/node": "^22.10.2",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-playwright": "^2.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^9.1.7",
+    "prettier": "^3.4.2"
+  }
+}
