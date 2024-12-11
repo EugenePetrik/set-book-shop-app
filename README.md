@@ -38,14 +38,8 @@ cd backend && npm install && cd -
 
 ### Run application
 
-- Run back-end application in production mode
+- Run back-end application
 
 ```bash
 cd backend && npm start
-```
-
-- Run back-end application in development mode
-
-```bash
-cd backend && npm run server
 ```
