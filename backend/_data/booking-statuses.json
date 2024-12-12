@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "665dbbf7775e99e3f80dbb2a",
+    "name": "SUBMITTED"
+  },
+  {
+    "_id": "665dbc00775e99e3f80dbb2c",
+    "name": "REJECTED"
+  },
+  {
+    "_id": "665dbc05775e99e3f80dbb2e",
+    "name": "APPROVED"
+  },
+  {
+    "_id": "665dbc0a775e99e3f80dbb30",
+    "name": "CANCELED"
+  },
+  {
+    "_id": "665dbc0e775e99e3f80dbb32",
+    "name": "IN_DELIVERY"
+  },
+  {
+    "_id": "665dbc12775e99e3f80dbb34",
+    "name": "COMPLETED"
+  }
+]

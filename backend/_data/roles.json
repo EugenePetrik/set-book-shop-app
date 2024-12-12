@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "665dbb2a62255420bc57dc8f",
+    "name": "ADMIN"
+  },
+  {
+    "_id": "665dbb3a62255420bc57dc93",
+    "name": "MANAGER"
+  },
+  {
+    "_id": "665dbb3e62255420bc57dc95",
+    "name": "CUSTOMER"
+  }
+]

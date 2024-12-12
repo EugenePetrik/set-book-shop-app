@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "665e0b62eb29c991e51d79ec",
+    "name": "The Adventures of Sherlock Holmes",
+    "description": "A collection of short stories featuring the legendary detective Sherlock Holmes.",
+    "author": "Arthur Conan Doyle",
+    "price": 12.99,
+    "image_path": "https://picsum.photos/seed/Ho5OO/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79ed",
+    "name": "To Kill a Mockingbird",
+    "description": "A novel about the serious issues of rape and racial inequality.",
+    "author": "Harper Lee",
+    "price": 14.99,
+    "image_path": "https://picsum.photos/seed/CpSxV1KE/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79ee",
+    "name": "1984 - George Orwell",
+    "description": "A dystopian novel set in a totalitarian society ruled by Big Brother.",
+    "author": "George Orwell",
+    "price": 13.5,
+    "image_path": "https://picsum.photos/seed/763ZNNy/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79ef",
+    "name": "Pride and Prejudice",
+    "description": "A romantic novel that also critiques the British landed gentry.",
+    "author": "Jane Austen",
+    "price": 11.99,
+    "image_path": "https://picsum.photos/seed/L0zDQkbc/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79f0",
+    "name": "The Great Gatsby",
+    "description": "A novel about the American dream and the Roaring Twenties.",
+    "author": "F. Scott Fitzgerald",
+    "price": 10.99,
+    "image_path": "https://picsum.photos/seed/q06BHz/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79f1",
+    "name": "Moby-Dick - Herman Melville",
+    "description": "A novel about the voyage of the whaling ship Pequod.",
+    "author": "Herman Melville",
+    "price": 15.99,
+    "image_path": "https://picsum.photos/seed/a36uYX/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79f2",
+    "name": "War and Peace - Leo Tolstoy",
+    "description": "A novel that chronicles the history of the French invasion of Russia.",
+    "author": "Leo Tolstoy",
+    "price": 19.99,
+    "image_path": "https://picsum.photos/seed/By9NJpuGW/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79f3",
+    "name": "The Catcher in the Rye",
+    "description": "A novel about the events in the life of a young boy named Holden Caulfield.",
+    "author": "J.D. Salinger",
+    "price": 12.5,
+    "image_path": "https://picsum.photos/seed/AyLW3K6/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79f4",
+    "name": "The Hobbit - J.R.R. Tolkien",
+    "description": "A fantasy novel about the journey of Bilbo Baggins.",
+    "author": "J.R.R. Tolkien",
+    "price": 13.99,
+    "image_path": "https://picsum.photos/seed/DGlakjLIMH/640/480"
+  },
+  {
+    "_id": "665e0b62eb29c991e51d79f5",
+    "name": "The Lord of the Rings",
+    "description": "A high-fantasy epic novel that follows the quest to destroy the One Ring.",
+    "author": "J.R.R. Tolkien",
+    "price": 29.99,
+    "image_path": "https://picsum.photos/seed/qkdzl9zBZq/640/480"
+  }
+]

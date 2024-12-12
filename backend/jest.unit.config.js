@@ -1,0 +1,52 @@
+module.exports = {
+  testTimeout: 15_000,
+  verbose: true,
+  testEnvironment: 'node',
+  bail: 0,
+  automock: false,
+  clearMocks: true,
+  resetMocks: true,
+  restoreMocks: false,
+  setupFilesAfterEnv: ['<rootDir>/src/__tests__/unit/setup.js'],
+  testPathIgnorePatterns: ['/node_modules/'],
+  collectCoverage: true,
+  coverageDirectory: 'unit-tests-coverage',
+  coverageReporters: ['html', 'text'],
+  coverageProvider: 'v8',
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
+  collectCoverageFrom: [
+    'src/**/*.js',
+    '!src/__tests__/**/*.js',
+    '!src/createApp.js',
+    '!src/index.js',
+    '!src/utils/seeder.js',
+    '!src/utils/swagger.js',
+    '!src/config/*.js',
+    '!src/middleware/*.js',
+    '!src/routes/**/*.js',
+  ],
+  moduleFileExtensions: ['js', 'json', 'node'],
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+  },
+  testRegex: '__tests__/unit/.*.test.js$',
+  reporters: [
+    'default',
+    [
+      'jest-html-reporter',
+      {
+        pageTitle: 'Bookshop API Unit Tests Report',
+        outputPath: './unit-tests-report/test-report.html',
+        includeFailureMsg: true,
+        includeSuiteFailure: true,
+      },
+    ],
+  ],
+};

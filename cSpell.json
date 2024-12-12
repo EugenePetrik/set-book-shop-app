@@ -1,0 +1,37 @@
+{
+  "version": "0.2",
+  "language": "en-GB",
+  "words": [
+    "Anytown",
+    "Bookstore",
+    "Cbkkkak",
+    "conn",
+    "douglasjason",
+    "epam",
+    "fulfill",
+    "johndoe",
+    "Lauraville",
+    "maxlength",
+    "Petryk",
+    "Tfdtr",
+    "Tylerport",
+    "webfonts",
+    "Yevhen"
+  ],
+  "flagWords": [],
+  "ignoreWords": [],
+  "ignorePaths": [
+    "*/**/node_modules",
+    "*/**/integration-tests-coverage",
+    "*/**/integration-tests-report",
+    "*/**/unit-tests-coverage",
+    "*/**/unit-tests-report",
+    "*/**/playwright-report",
+    "*/**/test-results",
+    "backend/_data",
+    "backend/_postman",
+    ".vscode",
+    "docs",
+    ".github"
+  ]
+}
