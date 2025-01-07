@@ -1,0 +1,1554 @@
+{
+  "info": {
+    "_postman_id": "7704c162-cd3c-4a8d-9054-71b111ec26de",
+    "name": "Bookshop API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18704595"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["pm.globals.set(\"TOKEN\", pm.response.json().token);", ""],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Qwerty213\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["pm.environment.set(\"TOKEN\", pm.response.json().token);", ""],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe1@example.com\",\n  \"password\": \"Qwerty213\",\n  \"phone\": \"0012633289419\",\n  \"address\": \"37397 John Plains, North Lauraville, AZ 59986\",\n  \"login\": \"john_doe1\",\n  \"role\": \"665dbb3e62255420bc57dc95\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/logout",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "auth", "logout"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get current user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "auth", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update current user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Douglas Jason\"\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/update-details",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "auth", "update-details"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get users",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get specific user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users/665dbb2a62255420bc57dc81",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "users", "665dbb2a62255420bc57dc81"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"john Doe6\",\n    \"role\": \"665dbb2a62255420bc57dc8f\",\n    \"email\": \"john.doe8@example.com\",\n    \"phone\": \"1234567890\",\n    \"address\": \"Dnipro\",\n    \"login\": \"john-doe8\",\n    \"password\": \"1234567\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"john Doe\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users/665dbb2a62255420bc57dc81",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "users", "665dbb2a62255420bc57dc81"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users/665dbb2a62255420bc57dc85",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "users", "665dbb2a62255420bc57dc85"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "Get roles",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/roles",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "roles"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get specific role",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/roles/665dbb2a62255420bc57dc8f",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "roles", "665dbb2a62255420bc57dc8f"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create role",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"CUSTOMER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/roles",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "roles"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update role",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"CUSTOMER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/roles/665dbb3e62255420bc57dc95",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "roles", "665dbb3e62255420bc57dc95"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete role",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/roles/665dbb3a62255420bc57dc93",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "roles", "665dbb3a62255420bc57dc93"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Booking statuses",
+      "item": [
+        {
+          "name": "Get booking statuses",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/booking-statuses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "booking-statuses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get specific booking status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/booking-statuses/665dbbf7775e99e3f80dbb2a",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "booking-statuses", "665dbbf7775e99e3f80dbb2a"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create booking status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"COMPLETED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/booking-statuses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "booking-statuses"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update booking status",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"REJECTED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/booking-statuses/665dbc00775e99e3f80dbb2c",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "booking-statuses", "665dbc00775e99e3f80dbb2c"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete booking status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/booking-statuses/665dbc00775e99e3f80dbb2c",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "booking-statuses", "665dbc00775e99e3f80dbb2c"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "Get products",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/products",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get specific product",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/products/665e0b62eb29c991e51d79ec",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "products", "665e0b62eb29c991e51d79ec"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create product",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Product With Name 4\",\n    \"description\": \"Product 3 description\",\n    \"author\": \"Anna Petryk\",\n    \"price\": 28,\n    \"image_path\": \"https://file-examples.com/storage/fe4e1227086659fa1a24064/2017/10/file_example_JPG_100kB.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/products",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update product",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"The Adventures of Sherlock Holmes new series\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/products/66604f55670660d8d36140ca",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "products", "66604f55670660d8d36140ca"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete product",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/products/66697f6155325cea44a76d3f",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "products", "66697f6155325cea44a76d3f"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "StoreItem",
+      "item": [
+        {
+          "name": "Get store items",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/store-items",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "store-items"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get specific store item",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/store-items/665e0b62eb29c991e51d79fe",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "store-items", "665e0b62eb29c991e51d79fe"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create store item",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"product\": \"6665cfaa9d9e71b8a9f0eb99\",\n    \"available_qty\": 30,\n    \"booked_qty\": 0,\n    \"sold_qty\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/store-items",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "store-items"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update store item",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"product\": \"665e0b62eb29c991e51d79ec\",\n    \"available_qty\": 40,\n    \"booked_qty\": 0,\n    \"sold_qty\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/store-items/666470166eb2fcea16e63893",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "store-items", "666470166eb2fcea16e63893"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete store item",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/store-items/66609a9bfe96816e364c5472",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "store-items", "66609a9bfe96816e364c5472"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Booking",
+      "item": [
+        {
+          "name": "Get bookings",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/bookings",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "bookings"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get specific booking",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/bookings/665ea909a1e643607bff48f2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "bookings", "665ea909a1e643607bff48f2"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create booking",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"product\": \"665e0b62eb29c991e51d79ec\",\n    \"user\": \"665dbb2a62255420bc57dc99\",\n    \"delivery_address\": \"Kyiv city, address\",\n    \"date\": \"2024-06-06\",\n    \"time\": \"15:00\",\n    \"status\": \"665dbbf7775e99e3f80dbb2a\",\n    \"quantity\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/bookings",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "bookings"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update booking",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"665dbc0a775e99e3f80dbb30\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/bookings/667ed1acf4036738760c8dd3",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "bookings", "667ed1acf4036738760c8dd3"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete booking",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let token = pm.globals.get(\"TOKEN\");",
+                  "",
+                  "if (!token) {",
+                  "    console.error(\"TOKEN is not set\");",
+                  "} else {",
+                  "    pm.request.headers.add({",
+                  "        key: \"Authorization\",",
+                  "        value: `Bearer ${token}`,",
+                  "    });",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/bookings/66604bab02da2376f132b20e",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "bookings", "66604bab02da2376f132b20e"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "TOKEN",
+      "value": "{{TOKEN}}"
+    }
+  ]
+}
