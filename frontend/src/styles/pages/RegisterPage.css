@@ -1,0 +1,17 @@
+@import './Common.css';
+
+.register-form .register-button {
+  background-color: #28a745;
+}
+
+.register-form .register-button:hover {
+  background-color: #218838;
+}
+
+.register-form .login-button {
+  background-color: #007bff;
+}
+
+.register-form .login-button:hover {
+  background-color: #0056b3;
+}

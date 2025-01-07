@@ -1,0 +1,84 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  z-index: 1000;
+}
+
+.modal h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal form label {
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.modal form input {
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.modal form .button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.modal form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  flex: 1;
+}
+
+.modal form button[type='button'] {
+  background-color: #ccc;
+  color: #333;
+}
+
+.modal form button[type='button']:hover {
+  background-color: #bbb;
+}
+
+.modal form button[type='button']:last-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal form button[type='button']:last-child:hover {
+  background-color: #0056b3;
+}
+
+.modal input[readonly] {
+  background-color: #e9ecef;
+}

@@ -1,0 +1,37 @@
+@import './Common.css';
+
+.booking-manager-page .approve-button,
+.booking-manager-page .reject-button,
+.booking-manager-page .close-button {
+  padding: 10px 20px;
+  margin: 10px 5px 0 5px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.booking-manager-page .approve-button {
+  background-color: #28a745;
+}
+
+.booking-manager-page .approve-button:hover {
+  background-color: #218838;
+}
+
+.booking-manager-page .reject-button {
+  background-color: #dc3545;
+}
+
+.booking-manager-page .reject-button:hover {
+  background-color: #c82333;
+}
+
+.booking-manager-page .close-button {
+  background-color: #007bff;
+}
+
+.booking-manager-page .close-button:hover {
+  background-color: #0056b3;
+}
