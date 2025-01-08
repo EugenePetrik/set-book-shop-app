@@ -23,6 +23,7 @@ const StorePage = () => {
   const [storeItems, setStoreItems] = useState([]);
   const [notification, setNotification] = useState({ message: '', type: '' });
   const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [selectedStoreItem, setSelectedStoreItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const itemsPerPage = 10;
