@@ -1,0 +1,87 @@
+name: Testing pipeline
+
+on:
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  testing-pipeline:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRE: ${{ secrets.JWT_EXPIRE }}
+      JWT_COOKIE_EXPIRE: ${{ secrets.JWT_COOKIE_EXPIRE }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Node JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install global dependencies
+        run: npm ci
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Check linters
+        run: npm run check-all
+
+      - name: Clear database
+        run: |
+          cd backend
+          npm run seed:destroy
+      
+      - name: Seed database
+        run: |
+          cd backend
+          npm run seed:import
+
+      - name: Run unit tests
+        run: |
+          cd backend
+          npm run test:unit
+
+      - name: Run api tests
+        run: |
+          cd backend
+          npm run test:integration
+
+      - name: Upload unit tests HTML report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: HTML report unit tests
+          path: ./backend/unit-tests-report
+          retention-days: 7
+      
+      - name: Upload unit tests coverage report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Coverage report unit tests
+          path: ./backend/unit-tests-coverage
+          retention-days: 7
+
+      - name: Upload api tests HTML report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: HTML report api tests
+          path: ./backend/integration-tests-report
+          retention-days: 7
+      
+      - name: Upload api tests coverage report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Coverage report api tests
+          path: ./backend/integration-tests-coverage
+          retention-days: 7
