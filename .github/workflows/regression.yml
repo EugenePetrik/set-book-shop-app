@@ -1,0 +1,76 @@
+name: Regression pipeline
+
+on:
+  schedule:
+    - cron: '0 23 * * 1-5'
+
+jobs:
+  regression-pipeline:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRE: ${{ secrets.JWT_EXPIRE }}
+      JWT_COOKIE_EXPIRE: ${{ secrets.JWT_COOKIE_EXPIRE }}
+      CUSTOMER_ROLE_ID: ${{ secrets.CUSTOMER_ROLE_ID }}
+      REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
+      REACT_APP_WEB_BASE_URL: ${{ secrets.REACT_APP_WEB_BASE_URL }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Node JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install global dependencies
+        run: npm ci
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Install Playwright Browsers
+        run: |
+          cd frontend
+          npx playwright install --with-deps chromium
+
+      - name: Clear database
+        run: |
+          cd backend
+          npm run seed:destroy
+      
+      - name: Seed database
+        run: |
+          cd backend
+          npm run seed:import
+
+      - name: Run backend server
+        run: |
+          npm run server &
+
+      - name: Run frontend server
+        run: |
+          npm run client &
+
+      - name: Run E2E tests
+        run: |
+          cd frontend
+          npx playwright test
+
+      - name: Upload HTML report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: HTML report
+          path: ./frontend/playwright-report
+          retention-days: 7
