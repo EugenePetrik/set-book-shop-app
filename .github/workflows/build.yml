@@ -1,0 +1,56 @@
+name: Build pipeline
+
+on:
+  push:
+    branches: '**'
+
+jobs:
+  build-pipeline:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRE: ${{ secrets.JWT_EXPIRE }}
+      JWT_COOKIE_EXPIRE: ${{ secrets.JWT_COOKIE_EXPIRE }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Node JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install global dependencies
+        run: npm ci
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Check linters
+        run: npm run check-all
+
+      - name: Run unit tests
+        run: |
+          cd backend
+          npm run test:unit
+
+      - name: Upload HTML report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: HTML report
+          path: ./backend/unit-tests-report
+          retention-days: 7
+      
+      - name: Upload coverage report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Coverage report
+          path: ./backend/unit-tests-coverage
+          retention-days: 7
