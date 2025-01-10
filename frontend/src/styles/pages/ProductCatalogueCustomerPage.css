@@ -1,0 +1,16 @@
+@import './Common.css';
+
+.product-catalogue-customer-page .book-button {
+  padding: 10px 40px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  align-self: flex-end;
+}
+
+.product-catalogue-customer-page .book-button:hover {
+  background-color: #0056b3;
+}

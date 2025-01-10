@@ -1,0 +1,49 @@
+@import './Common.css';
+
+.product-catalogue-manager-page .button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.product-catalogue-manager-page .edit-button,
+.product-catalogue-manager-page .delete-button {
+  padding: 10px 40px;
+  margin: 10px 5px 0 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.product-catalogue-manager-page .edit-button {
+  background-color: #007bff;
+}
+
+.product-catalogue-manager-page .edit-button:hover {
+  background-color: #0056b3;
+}
+
+.product-catalogue-manager-page .delete-button {
+  background-color: #dc3545;
+}
+
+.product-catalogue-manager-page .delete-button:hover {
+  background-color: #c82333;
+}
+
+.product-catalogue-manager-page .create-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.product-catalogue-manager-page .create-button:hover {
+  background-color: #218838;
+}

@@ -10,7 +10,9 @@
     "check-cspell": "cspell . --quiet",
     "check-all": "npm run check-prettier && npm run check-eslint && npm run check-cspell",
     "format": "prettier --write . && eslint . --ext js --fix",
-    "server": "cd backend && npm start"
+    "server": "cd backend && npm start",
+    "client": "cd frontend && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,36 @@
+@import './Common.css';
+
+.store-page .create-button,
+.store-page .edit-button,
+.store-page .delete-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+}
+
+.store-page .create-button {
+  background-color: #28a745;
+}
+
+.store-page .create-button:hover {
+  background-color: #218838;
+}
+
+.store-page .edit-button {
+  background-color: #007bff;
+}
+
+.store-page .edit-button:hover {
+  background-color: #0056b3;
+}
+
+.store-page .delete-button {
+  background-color: #dc3545;
+}
+
+.store-page .delete-button:hover {
+  background-color: #c82333;
+}

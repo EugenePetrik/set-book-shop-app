@@ -1,0 +1,36 @@
+@import './Common.css';
+
+.users-page .create-button,
+.users-page .edit-button,
+.users-page .delete-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+}
+
+.users-page .create-button {
+  background-color: #28a745;
+}
+
+.users-page .create-button:hover {
+  background-color: #218838;
+}
+
+.users-page .edit-button {
+  background-color: #007bff;
+}
+
+.users-page .edit-button:hover {
+  background-color: #0056b3;
+}
+
+.users-page .delete-button {
+  background-color: #dc3545;
+}
+
+.users-page .delete-button:hover {
+  background-color: #c82333;
+}
