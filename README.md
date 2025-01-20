@@ -8,6 +8,12 @@
 - [MongoDB](https://www.mongodb.com/)
 - [Swagger](https://swagger.io/)
 
+### Technologies Front-end
+
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Node.js](https://nodejs.org/en/)
+- [React](https://react.dev/)
+
 ### Installation
 
 - Install [Node.js](https://nodejs.org/en/) LTS version
@@ -36,10 +42,14 @@ npm install
 cd backend && npm install && cd -
 ```
 
-### Run application
-
-- Run back-end application
+- Install front-end dependencies
 
 ```bash
-cd backend && npm start
+cd frontend && npm install && cd -
+```
+
+### Run application
+
+```bash
+npm run dev
 ```
