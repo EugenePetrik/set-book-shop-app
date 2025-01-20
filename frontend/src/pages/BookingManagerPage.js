@@ -19,6 +19,7 @@ const BookingManagerPage = () => {
   });
 
   const [bookings, setBookings] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const bookingsPerPage = 3;
