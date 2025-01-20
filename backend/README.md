@@ -84,3 +84,29 @@ npm run test:unit
 ```bash
 npm run test:integration
 ```
+
+### MongoDB queries
+
+- Find one record
+
+```mongodb
+db["bookings"].findOne({ quantity: { $in : [1, 2] } })
+```
+
+- Find all records
+
+```mongodb
+db["bookings"].find({ quantity: { $in : [1, 2] } })
+```
+
+- Find one record
+
+```mongodb
+db["bookings"].findOne({ product: ObjectId('6759e87f9a6bea725bd4cc85') })
+```
+
+- Update one record
+
+```mongodb
+db["bookings"].updateOne({ product: ObjectId('6759e87f9a6bea725bd4cc85') }, { $set: { quantity: 1000 } })
+```
